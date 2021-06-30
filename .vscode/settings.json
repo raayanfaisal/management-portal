@@ -1,0 +1,11 @@
+{
+  "files.exclude": {
+    ".dart_tool": true,
+    ".metadata": true,
+    ".packages": true,
+    "pubspec.lock": true,
+    // generated code
+    "**/*.freezed.dart": true,
+    "**/*.g.dart": true
+  }
+}

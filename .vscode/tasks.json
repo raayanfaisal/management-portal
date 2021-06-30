@@ -1,0 +1,119 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "flutter pub get",
+      "group": "build",
+      "type": "shell",
+      "command": "flutter",
+      "args": [
+        "pub",
+        "get"
+      ],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "panel": "shared",
+        "clear": true
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "flutter pub run build",
+      "dependsOn": "flutter pub get",
+      "group": "build",
+      "type": "shell",
+      "command": "flutter",
+      "args": [
+        "pub",
+        "run",
+        "build_runner",
+        "build",
+        "--delete-conflicting-outputs"
+      ],
+      "problemMatcher": "$dart-build_runner",
+      "isBackground": true,
+      "presentation": {
+        "group": "code generation",
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "panel": "shared",
+        "clear": true
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "flutter pub run build watch",
+      "dependsOn": "flutter pub get",
+      "group": "build",
+      "type": "shell",
+      "command": "flutter",
+      "args": [
+        "pub",
+        "run",
+        "build_runner",
+        "watch",
+        "--delete-conflicting-outputs"
+      ],
+      "problemMatcher": "$dart-build_runner",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "runOptions": {
+        "instanceLimit": 1,
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "flutter build web release",
+      "dependsOn": "flutter pub run build",
+      "group": "build",
+      "type": "shell",
+      "command": "flutter",
+      "args": [
+        "build",
+        "web",
+        "--release"
+      ],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "panel": "shared",
+        "clear": true
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    },
+    {
+      "label": "firebase deploy",
+      "dependsOn": "flutter build web release",
+      "group": "build",
+      "type": "shell",
+      "command": "firebase",
+      "args": [
+        "deploy"
+      ],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "revealProblems": "onProblem",
+        "panel": "shared",
+        "clear": true
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    }
+  ]
+}

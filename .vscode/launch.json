@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "dart",
+      "name": "Flutter Debug",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "console": "debugConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "flutterMode": "debug",
+      "preLaunchTask": "flutter pub run build watch",
+    },
+    {
+      "type": "dart",
+      "name": "Flutter Release",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "console": "debugConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "flutterMode": "release",
+      "preLaunchTask": "flutter pub run build",
+    },
+  ]
+}
