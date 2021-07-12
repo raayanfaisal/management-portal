@@ -105,74 +105,104 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    MediaQueryData queryData;
+    queryData = MediaQuery.of(context);
     return SizedBox(
-      width: 480.0,
-      child: Card(
-        color: Theme.of(context).backgroundColor,
-        child: Form(
-          key: _formKey,
-          onChanged: _notifyFormChange,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 32.0),
-                      child: Text('Sign in',
-                          style: Theme.of(context).textTheme.headline6),
-                    ),
-                    TextFormField(
-                      maxLines: 1,
-                      autofocus: true,
-                      enabled: !_isSubmitting,
-                      controller: _emailTextController,
-                      validator: _validateEmail,
-                      autofillHints: _isSubmitting
-                          ? null
-                          : const [AutofillHints.email, AutofillHints.username],
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.email),
-                        labelText: 'Email',
-                        filled: true,
-                        fillColor: Colors.white,
-                        border: const OutlineInputBorder(),
-                        errorText: _validateEmail(
-                          _emailTextController.text,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.900,
+        child: Row(
+        mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Container(
+          margin: const EdgeInsets.only(top: 50.0),
+          alignment: Alignment(0.0, -1.0),
+          width: MediaQuery.of(context).size.width * 0.50,
+          height: MediaQuery.of(context).size.height * 1000,
+          decoration: BoxDecoration(
+            color: Colors.green,
+            image: DecorationImage(
+              image: AssetImage("assets/BackgroundImage.jpeg"),
+              fit: BoxFit.cover,
+            ),
+            ),
+        ),
+        Container(
+          width: 567,
+          height: 610,
+          margin: EdgeInsets.all(20.0),
+          decoration: BoxDecoration(color: Colors.white),
+          child: Form(
+            key: _formKey,
+            onChanged: _notifyFormChange,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 32.0),
+                        child: Text('Login',
+                            style: TextStyle(color: Colors.black, fontSize: 50, fontWeight: FontWeight.bold)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 32.0),
+                        child: Text('Welcome to Experglobal Client Log in Portal',
+                            style: TextStyle(color: Colors.black),
+                        )
+                      ),
+                      TextFormField(
+                        maxLines: 1,
+                        autofocus: true,
+                        enabled: !_isSubmitting,
+                        controller: _emailTextController,
+                        validator: _validateEmail,
+                        autofillHints: _isSubmitting
+                            ? null
+                            : const [
+                                AutofillHints.email,
+                                AutofillHints.username
+                              ],
+                        decoration: InputDecoration(
+                          labelText: 'Example@gmail.com',
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: const OutlineInputBorder(),
+                          errorText: _validateEmail(
+                            _emailTextController.text,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 16.0),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: TextFormField(
-                            maxLines: 1,
-                            enabled: !_isSubmitting,
-                            obscureText: !_passwordIsVisible,
-                            controller: _passwordTextController,
-                            validator: _validatePassword,
-                            autofillHints: _isSubmitting
-                                ? null
-                                : const [AutofillHints.password],
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.lock),
-                              labelText: 'Password',
-                              counterText: _passwordCharCountStr,
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: const OutlineInputBorder(),
-                              errorText: _validatePassword(
-                                _passwordTextController.text,
+                      const SizedBox(height: 16.0, width: 20.0,),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: TextFormField(
+                              
+                              maxLines: 1,
+                              enabled: !_isSubmitting,
+                              obscureText: !_passwordIsVisible,
+                              controller: _passwordTextController,
+                              validator: _validatePassword,
+                              autofillHints: _isSubmitting
+                                  ? null
+                                  : const [AutofillHints.password],
+                              decoration: InputDecoration(
+                                labelText: 'Password',
+                                counterText: _passwordCharCountStr,
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: const OutlineInputBorder(),
+                                errorText: _validatePassword(
+                                  _passwordTextController.text,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 16.0),
-                        IconButton(
+                          const SizedBox(width: 16.0),
+                          IconButton(
                           tooltip: _passwordIsVisible ? 'Hide' : 'Show',
                           icon: _passwordIsVisible
                               ? const Icon(Icons.visibility)
@@ -180,17 +210,19 @@ class _SignInPageState extends State<SignInPage> {
                           onPressed:
                               !_isSubmitting ? _togglePasswordVisibility : null,
                         ),
-                      ],
-                    ),
-                  ],
+
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              _buildButtonBar(context),
-            ],
+                _buildButtonBar(context),
+              ],
+            ),
           ),
-        ),
-      ),
-    );
+        )
+      ],
+    ));
   }
 
   Widget _buildButtonBar(BuildContext context) {
@@ -199,7 +231,6 @@ class _SignInPageState extends State<SignInPage> {
       child: _isSubmitting
           ? const LinearProgressIndicator()
           : ButtonBar(
-              alignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 // FlatButton(
                 //   onPressed: _onCreateAccount,
@@ -210,14 +241,11 @@ class _SignInPageState extends State<SignInPage> {
                 //   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 //   child: const Text('Create an account'),
                 // ),
-                TextButton(
-                  onPressed: _onForgotPassword,
-                  child: const Text('Forgot password'),
-                ),
+                
                 ElevatedButton(
                   onPressed: _formIsValid ? _onContinue : null,
                   child: Text(
-                    'Continue',
+                    'Log In',
                     style: _formIsValid
                         ? Theme.of(context).primaryTextTheme.button
                         : Theme.of(context)
@@ -225,6 +253,15 @@ class _SignInPageState extends State<SignInPage> {
                             .button!
                             .apply(color: Theme.of(context).disabledColor),
                   ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.lightGreenAccent),
+                    
+                  )
+                ),
+                TextButton(
+                  
+                  onPressed: _onForgotPassword,
+                  child: const Text('Forgot password'),
                 ),
               ],
             ),
